@@ -2,10 +2,12 @@
 
 Sistema de Controle de Agendamentos para Vagas Disponíveis.
 
+
 ## Funcionamento
 
 Ao acessar o sistema pela url http://localhost:9292 o usuário é redirecionado para a página inicial.
 No menu lateral estarão listadas as páginas de Consulta de Agendamentos, Vagas e Solicitantes.
+
 
 ### Tela de Agendamentos
 
@@ -15,17 +17,20 @@ Na tela de inclusão/edição, caso seja preenchida uma Data em que não há Vag
 
 Ao clicar no botão de exclusão, o registro selecionado é excluído da base de dados.
 
+
 ### Tela de Vagas
 
 Ao acessar a tela de Consulta de Vagas, é exibida uma tabela contendo as Vagas cadastradas. Nesta tela são realizadas as ações de CRUD de Vagas.
 
 Na tela de inclusão/edição, caso seja preenchido um período de data que conflite com outro período de data salvo na base ou os dados obrigatórios não sejam preenchidos, o sistema exibirá uma mensagem de erro e não permitirá salvar.
 
+
 ### Tela de Solicitantes
 
 Ao acessar a tela de Consulta de Solicitantes, é exibida uma tabela contendo os Solicitantes cadastrados. Nesta tela são realizadas as ações de CRUD de Solicitantes.
 
 Na tela de inclusão/edição, caso os dados obrigatórios não sejam preenchidos, o sistema exibirá uma mensagem de erro e não permitirá salvar.
+
 
 ## Arquitetura
 
