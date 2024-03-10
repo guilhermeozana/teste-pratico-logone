@@ -34,7 +34,7 @@ Na tela de inclusão/edição, caso os dados obrigatórios não sejam preenchido
 
 ## Arquitetura
 
-A arquitetura adotada neste projeto foi MVC + Camada de Serviço (Service Layer) onde os pacotes:
+A arquitetura adotada neste projeto foi a MVC (Model, View, Controller) + Camada de Serviço (Service Layer) onde os pacotes:
 
 **model**: Responsável por representar os dados e a lógica de negócios subjacente da aplicação. 
 
