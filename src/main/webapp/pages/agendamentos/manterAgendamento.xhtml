@@ -1,0 +1,61 @@
+<ui:composition template="/pages/template/base.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container" id="container">
+            <h:form class="form-manter">
+                <p:messages id="mensagens" showDetail="true" closable="true" style="width: 100%">
+                    <p:autoUpdate/>
+                </p:messages>
+
+                    <h1 class="title" >#{agendamentoBean.edicao ? "Editar" : "Incluir"} Agendamento</h1>
+
+                    <h:panelGrid columns="1" id="panel">
+                        <p:outputPanel rendered="#{agendamentoBean.edicao}" class="field" >
+                            <h:outputLabel value="Id" />
+                            <p:inputText value="#{agendamentoBean.agendamentoDTO.id}" disabled="true" />
+                        </p:outputPanel>
+
+                        <p:outputPanel class="field">
+                            <h:outputLabel value="Data"/>
+                            <p:datePicker value="#{agendamentoBean.agendamentoDTO.data}" id="data" styleClass="custom-date-picker"
+                                          mindate="#{agendamentoBean.dataAtual}"
+                                          required="true" requiredMessage="Por favor, preencha o campo Data."/>
+                        </p:outputPanel>
+
+                        <p:outputPanel class="field" style="width: 100%;">
+                            <h:outputLabel value="Número"  />
+                            <p:inputText value="#{agendamentoBean.agendamentoDTO.numero}" required="true" requiredMessage="Por favor, preencha o campo Número." />
+                        </p:outputPanel>
+
+                        <p:outputPanel class="field">
+                            <h:outputLabel value="Motivo"  />
+                            <p:inputText value="#{agendamentoBean.agendamentoDTO.motivo}" required="true" requiredMessage="Por favor, preencha o campo Motivo."/>
+                        </p:outputPanel>
+
+                        <p:outputPanel class="field" style="margin-top: 5px">
+                                <h:outputLabel value="Solicitante"  />
+                                <p:selectOneMenu value="#{agendamentoBean.agendamentoDTO.solicitante}"
+                                                 converter="solicitanteConverter" class="select"
+                                                 required="true" requiredMessage="Por favor, selecione um Solicitante.">
+                                    <f:selectItems value="#{agendamentoBean.listaSolicitantes}" var="solicitante"
+                                                   itemLabel="#{solicitante.id} - #{solicitante.nome}" itemValue="#{solicitante}"/>
+                                </p:selectOneMenu>
+                        </p:outputPanel>
+
+                    </h:panelGrid>
+                    <div class="form-footer">
+                        <p:commandButton value="Salvar" action="#{agendamentoBean.salvarAgendamento()}"
+                                         styleClass="ui-button-warning" update="@form mensagens" process="@form @this"/>
+                        <p:commandButton value="Cancelar" styleClass="ui-button-outlined ui-button-warning"
+                                         action="#{agendamentoBean.retornarLista()}" process="@this"/>
+
+                    </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

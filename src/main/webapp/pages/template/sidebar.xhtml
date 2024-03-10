@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+        <p:card class="sidebar-card">
+            <p:menu toggleable="true" style="width: 240px">
+                <p:submenu label="Agendamentos">
+                    <p:menuitem value="Consultar Agendamentos" icon="pi pi-search" url="/pages/agendamentos/listarAgendamentos.xhtml"/>
+                </p:submenu>
+
+                <p:submenu label="Vagas">
+                    <p:menuitem value="Consultar Vagas" icon="pi pi-search" url="/pages/vagas/listarVagas.xhtml"/>
+                </p:submenu>
+
+                <p:submenu label="Solicitantes">
+                    <p:menuitem value="Consultar Solicitantes" icon="pi pi-search" url="/pages/solicitantes/listarSolicitantes.xhtml"/>
+                </p:submenu>
+            </p:menu>
+        </p:card>
+
+</ui:composition>

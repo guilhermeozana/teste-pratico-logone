@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta charset="UTF-8"/>
+        <title>Controle de Agendamentos</title>
+
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/styles.css" />
+
+    </h:head>
+
+    <h:body>
+
+        <ui:include src="/pages/template/header.xhtml"/>
+
+        <div class="page-content">
+            <div class="sidebar">
+                <ui:include src="/pages/template/sidebar.xhtml"/>
+            </div>
+            <div class="content">
+                <ui:insert name="content"/>
+            </div>
+
+        </div>
+
+        <ui:include src="/pages/template/footer.xhtml"/>
+    </h:body>
+</ui:composition>

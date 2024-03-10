@@ -1,0 +1,37 @@
+<ui:composition template="/pages/template/base.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container" id="container">
+            <h:form class="form-manter">
+                <p:messages id="mensagens" showDetail="true" closable="true" style="width: 100%">
+                    <p:autoUpdate/>
+                </p:messages>
+                <h1 class="title" >#{solicitanteBean.edicao ? "Editar" : "Incluir"} Solicitante</h1>
+
+                <h:panelGrid columns="1">
+                    <h:panelGroup rendered="#{solicitanteBean.edicao}" class="field" id="panelGrup" >
+                        <h:outputLabel value="Id" style="margin-top: 10px;" />
+                        <p:inputText value="#{solicitanteBean.solicitanteDTO.id}" disabled="true" />
+                    </h:panelGroup>
+
+                    <h:panelGroup class="field">
+                        <h:outputLabel value="Nome"  />
+                        <p:inputText value="#{solicitanteBean.solicitanteDTO.nome}" required="true" requiredMessage="Por favor, preencha o campo Nome." />
+                    </h:panelGroup>
+
+                </h:panelGrid>
+                <div class="form-footer">
+                    <p:commandButton value="Salvar" action="#{solicitanteBean.salvarSolicitante()}"
+                                     styleClass="ui-button-warning" update="@form mensagens" process="@form @this"/>
+                    <p:commandButton value="Cancelar" styleClass="ui-button-outlined ui-button-warning"
+                                     action="#{solicitanteBean.retornarLista()}" process="@this"/>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

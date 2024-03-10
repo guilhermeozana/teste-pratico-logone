@@ -1,0 +1,59 @@
+<ui:composition template="/pages/template/base.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container" id="container">
+            <h:form class="form-manter" id="form">
+                <p:messages id="mensagens" showDetail="true" closable="true" style="width: 100%">
+                    <p:autoUpdate/>
+                </p:messages>
+                <h1 class="title" >#{vagasBean.edicao ? "Editar" : "Incluir"} Vaga</h1>
+
+                <h:panelGrid columns="1" id="painel">
+                    <h:panelGroup rendered="#{vagasBean.edicao}" class="field" id="panelGrup" >
+                        <h:outputLabel value="Id" style="margin-top: 10px;" />
+                        <p:inputText value="#{vagasBean.vagasDTO.id}" disabled="true"
+                                     required="true" requiredMessage="Por favor, preencha o campo Id." />
+                    </h:panelGroup>
+
+                    <h:panelGroup class="field">
+                        <h:outputLabel value="Data Início"/>
+                        <p:datePicker value="#{vagasBean.vagasDTO.inicio}" styleClass="custom-date-picker"
+                                      mindate="#{vagasBean.dataAtual}" id="periodoInicio"
+                                      required="true" requiredMessage="Por favor, preencha o campo Data Inicial.">
+                            <p:ajax event="change" update="periodoFim" listener="#{vagasBean.onDataInicioChange()}" process="@this" />
+                        </p:datePicker>
+                    </h:panelGroup>
+
+                    <h:panelGroup class="field">
+                        <h:outputLabel value="Data Fim"/>
+                        <p:datePicker value="#{vagasBean.vagasDTO.fim}" styleClass="custom-date-picker"
+                                      mindate="#{ vagasBean.dataAtual }" id="periodoFim"
+                                      required="true" requiredMessage="Por favor, preencha o campo Data Final.">
+                            <p:ajax event="change" update="periodoInicio" listener="#{vagasBean.onDataFimChange()}" process="@this" />
+                        </p:datePicker>
+
+                    </h:panelGroup>
+
+                    <h:panelGroup class="field">
+                        <h:outputLabel value="Quantidade"  />
+                        <p:inputNumber value="#{vagasBean.vagasDTO.quantidade}" mode="decimal" decimalPlaces="0" min="0"
+                                       required="true" requiredMessage="Por favor, preencha o campo Quantidade."/>
+                    </h:panelGroup>
+
+                </h:panelGrid>
+                <div class="form-footer">
+                    <p:commandButton value="Salvar" action="#{vagasBean.salvarVaga()}"
+                                     styleClass="ui-button-warning" update="@form mensagens" process="@form @this"/>
+                    <p:commandButton value="Cancelar" styleClass="ui-button-outlined ui-button-warning"
+                                     action="#{vagasBean.retornarLista()}" process="@this"/>
+
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

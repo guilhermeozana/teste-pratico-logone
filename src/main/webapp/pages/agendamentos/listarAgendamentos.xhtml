@@ -1,0 +1,93 @@
+<ui:composition template="/pages/template/base.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container" id="container">
+
+            <h:form id="form">
+                <p:messages id="mensagens" showDetail="true" closable="true" style="width: 100%">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:autoUpdate/>
+                <h1 class="title" >Agendamentos</h1>
+
+                <p:dataTable var="agendamento" value="#{agendamentoBean.listaAgendamentos}" id="tabela" rowKey="#{agendamento.id}" >
+                    <f:facet name="header">
+                        <div class="filter" id="filter">
+                            <span style="font-weight: bold; margin-bottom: 10px">Período:</span>
+                            <p:datePicker class="filter-field" value="#{agendamentoBean.periodoInicio}">
+                                <p:ajax event="change" update="periodoFim" listener="#{agendamentoBean.onDataInicioChange()}" process="@this tabela" />
+                            </p:datePicker>
+                            <p:outputLabel value="até"/>
+                            <p:datePicker class="filter-field" value="#{agendamentoBean.periodoFim}" id="periodoFim"
+                                          mindate="#{agendamentoBean.periodoInicio}"/>
+                            <p:commandButton icon="pi pi-search" styleClass="rounded-button ui-button-warning"
+                                             update="@form" id="botao-pesquisar"
+                                             process="@this tabela"
+                                             actionListener="#{agendamentoBean.listarAgendamentos()}"/>
+                            <p:tooltip for="botao-pesquisar" value="Filtrar Busca" position="bottom" />
+
+                            <p:commandButton icon="pi pi-filter-slash" styleClass="rounded-button ui-button-warning ui-button-outlined"
+                                             update="@form" style="margin-left: 10px"
+                                             process="@this tabela" id="botao-limpar-filtros"
+                                             actionListener="#{agendamentoBean.init()}"/>
+                            <p:tooltip for="botao-limpar-filtros" value="Limpar Filtros" position="bottom" />
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="Id">
+                        <h:outputText value="#{agendamento.id}" />
+                    </p:column>
+
+                    <p:column headerText="Data">
+                        <h:outputText value="#{agendamento.data}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Numero">
+                        <h:outputText value="#{agendamento.numero}" />
+                    </p:column>
+
+                    <p:column headerText="Motivo" width="20%">
+                        <h:outputText value="#{agendamento.motivo}" />
+                    </p:column>
+
+                    <p:column headerText="Solicitante" width="20%">
+                        <h:outputText value="#{agendamento.solicitante.id} - #{agendamento.solicitante.nome}" />
+                    </p:column>
+                    <p:column headerText="Ações">
+                        <p:commandButton icon="pi pi-pencil" style="margin-right: 10px"
+                                         action="#{agendamentoBean.editarAgendamento(agendamento)}"
+                                         styleClass="edit-button rounded-button ui-button-warning" process="@this">
+                        </p:commandButton>
+
+                        <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash"
+                                         actionListener="#{agendamentoBean.excluirAgendamento(agendamento)}"
+                                         update=":form:tabela"
+                                         process="@this">
+                            <p:confirm header="Confirmation" message="Tem certeza que deseja excluir o agendamento?" icon="pi pi-info-circle"/>
+                        </p:commandButton>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat ui-button-warning"/>
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes ui-button-warning" />
+                        </p:confirmDialog>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Incluir" icon="pi pi-plus" action="#{agendamentoBean.incluirAgendamento()}"
+                                        process="@this" styleClass="ui-button-warning" />
+                    </f:facet>
+                </p:dataTable>
+
+
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>
