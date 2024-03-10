@@ -1,4 +1,4 @@
-﻿# Teste prático Log.One
+﻿# Teste Prático Log.One
 
 Sistema de Controle de Agendamentos para Vagas Disponíveis.
 
