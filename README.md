@@ -5,7 +5,8 @@ Sistema de Controle de Agendamentos para Vagas Disponíveis.
 ## Configuração
 
 Visando a fácil configuração do projeto, optei por utilizar o JoinFaces que é um starter do JSF para projetos Spring.  
-Também utilizei o Lombok para geração de Getters, Setters e Construtores. No intellij basta instalar o plugin do Lombok em Settings -> Plugins.
+Também utilizei o Lombok para geração de Getters, Setters e Construtores. No Intellij basta instalar o plugin do Lombok em Settings -> Plugins.
+
 
 ## Funcionamento
 
